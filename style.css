@@ -201,7 +201,7 @@ button:focus-visible {
   margin: 19px 0 13px;
 }
 h1 {
-  font-size: clamp(46px, 4.5vw, 70px);
+  font-size: clamp(46px, 4.5vw, 65px);
   line-height: 1.09;
   letter-spacing: -0.047em;
   margin: 0 0 28px;
@@ -1198,8 +1198,6 @@ h1 {
   width: 128%;
   height: 76px;
   background: var(--color-orange);
-  pointer-events: none;
-  animation: schedule-wave-drift 9s ease-in-out infinite alternate;
   -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 63 C130 5 260 10 380 55 S610 95 750 40 S1000 15 1200 59 L1200 100 L0 100Z'/%3E%3C/svg%3E")
     center / 100% 100% no-repeat;
   mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 100' preserveAspectRatio='none'%3E%3Cpath fill='white' d='M0 63 C130 5 260 10 380 55 S610 95 750 40 S1000 15 1200 59 L1200 100 L0 100Z'/%3E%3C/svg%3E")
@@ -1211,7 +1209,6 @@ h1 {
 .schedule-wave--bottom {
   top: calc(100% - 2px);
   transform: rotate(180deg);
-  animation-name: schedule-wave-drift-bottom;
 }
 @keyframes schedule-wave-drift {
   from {
@@ -2840,5 +2837,207 @@ body {
   .footer-logo img {
     width: min(285px, 90vw);
     margin: auto;
+  }
+}
+
+/* Redesigned schedule: two readable club cards and three sessions per level. */
+.schedule-section {
+  overflow: visible;
+  overflow-x: visible;
+  clip-path: none;
+  padding: 98px 0 100px;
+  margin-block: 95px 90px;
+}
+.schedule-wave {
+  left: 0;
+  width: 100%;
+  height: clamp(55px, 8vw, 95px);
+  animation-duration: 10s;
+}
+.schedule-wave--top {
+  bottom: calc(100% - 2px);
+}
+.schedule-wave--bottom {
+  top: calc(100% - 2px);
+}
+.schedule-clubs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+.schedule-club {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(23px, 3vw, 38px);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 28px 7px 28px 28px;
+  background: rgba(255, 255, 255, 0.13);
+  box-shadow: 0 14px 35px rgba(115, 41, 0, 0.09);
+  backdrop-filter: blur(4px);
+}
+.schedule-club-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.schedule-club-level {
+  background: #fff;
+  color: var(--color-orange-dark);
+  border-radius: 50px;
+  padding: 7px 15px;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
+.schedule-club-type {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff3e7;
+}
+.schedule-club h3 {
+  font-size: clamp(22px, 2.4vw, 30px);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0 0 18px;
+  color: #fff;
+}
+.schedule-club-desc {
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 0 25px;
+  color: #fff9f5;
+  flex: 1;
+}
+.schedule-meetings {
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+}
+.schedule-meeting {
+  display: grid;
+  grid-template-columns: 75px minmax(90px, 0.75fr) minmax(0, 1.25fr);
+  align-items: center;
+  gap: 10px;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+}
+.schedule-meeting-index {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  opacity: 0.9;
+}
+.schedule-meeting-date {
+  font-size: 15px;
+  white-space: nowrap;
+}
+.schedule-meeting-date span {
+  font-weight: 500;
+}
+.schedule-meeting-times {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  justify-content: flex-end;
+}
+.schedule-meeting-times > span {
+  white-space: nowrap;
+}
+.schedule-club-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-top: 24px;
+  padding: 14px 17px;
+  background: #fff;
+  color: var(--color-orange-dark);
+  border-radius: 30px 5px 30px 30px;
+  font-weight: 700;
+  font-size: 14px;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
+}
+.schedule-club-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(90, 30, 0, 0.15);
+}
+.schedule-club-link span {
+  font-size: 20px;
+  line-height: 1;
+}
+.schedule-note {
+  max-width: 790px;
+  margin: 25px auto 0;
+  text-align: center;
+}
+/* Keep both animated wave edges visible at mobile widths. */
+@media (max-width: 760px) {
+  .schedule-section {
+    padding: 65px 0 70px;
+    margin-block: 82px 85px;
+    overflow: visible;
+    clip-path: none;
+  }
+  .schedule-wave {
+    left: 0;
+    width: 100%;
+    height: 72px;
+  }
+  .schedule-clubs {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .schedule-club {
+    padding: 23px 19px;
+    border-radius: 23px 6px 23px 23px;
+  }
+  .schedule-club-desc {
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .schedule-heading {
+    margin-bottom: 30px;
+  }
+  .schedule-meeting {
+    grid-template-columns: 65px minmax(70px, 0.8fr) minmax(0, 1.2fr);
+    gap: 7px;
+    padding: 14px 0;
+  }
+  .schedule-meeting-index {
+    font-size: 10px;
+  }
+  .schedule-meeting-date {
+    font-size: 13px;
+  }
+  .schedule-meeting-times {
+    font-size: 12px;
+    gap: 4px 8px;
+  }
+  .faq-section {
+    clip-path: none;
+    overflow: visible;
+    margin-block: 83px 85px;
+  }
+  .faq-wave {
+    left: 0;
+    width: 100%;
+    height: 70px;
+  }
+}
+@media (max-width: 380px) {
+  .schedule-meeting {
+    grid-template-columns: 58px 74px minmax(0, 1fr);
+  }
+  .schedule-meeting-times {
+    flex-direction: column;
+    align-items: flex-end;
   }
 }
